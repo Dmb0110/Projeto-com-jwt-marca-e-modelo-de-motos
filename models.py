@@ -2,12 +2,19 @@ from fastapi import FastAPI
 from sqlalchemy import Column, Integer, String, create_engine,ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker,relationship
 
-DATABASE_URL = "postgresql://postgres:davi9090@localhost:5432/banco_dmb"
+# URL de conexão com o banco PostgreSQL
+DATABASE_URL = "postgresql://postgres:davi9090@db:5432/banco_dmb"
 
+# Cria o motor de conexão com o banco
 engine = create_engine(DATABASE_URL)
+
+# Configura a sessão para interagir com o banco
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+# Base para definição dos modelos
 Base = declarative_base()
 
+# Modelo da tabela 'users'
 class User(Base):
     __tablename__ = 'users'
 
@@ -15,6 +22,7 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     password = Column(String)
 
+# Modelo da tabela 'motos'
 class Moto(Base):
     __tablename__ = 'motos'
 
@@ -23,74 +31,3 @@ class Moto(Base):
     modelo = Column(String)
     #  Essa coluna se relaciona com a coluna [id] da tabela [users]
     dono_id = Column(Integer, ForeignKey('users.id'))
-
-
-'''
-DATABASE_URL =
-
-engine = create_egine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()
-
-class User(Base):
-    __tablename__ = 'usuarios'
-
-    id = Column(Integer,prinmary_key=True,index=True)
-    username = Column(String)
-    password = Column(String)
-
-class Cliente(Base):
-    __tablename__ = 'clientes'
-
-    id = Column(Integer,primary_key=True,index=True)
-    nome = Column(String)
-    idade = Column(Integer)
-
-
-
-
-DATABASE_URL =
-
-engine = create_engine(DATABASE_URL)
-SessionLocel = sessionmaker(bind=engine,autocommit=True,autoflush=True)
-Base = declarative_base()
-
-class User(Base):
-    id = Column(primary_key=True,index=True)
-    username = Column(String)
-    password = Column(String)
-
-class Moto(Base):
-    id = Column(primary_key=True,index=True)
-    marca = Column(String)
-    modelo = Column(String)
-
-
-
-
-
-
-
-
-
-
-DATABASE_URL =
-
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine,autocommit=True,autflush=True)
-Base = declarative_base()
-
-class User(Base):
-    id = Column(Integer,primary_key=True,index=True)
-    username = Column(String)
-    password = Column(String)
-
-class Tv(Base):
-    id = Column(Integer,primary_key=True,index=True)
-    marca = Column(String)
-    polegadas = Column(Integer)
-
-'''
-
-
-
