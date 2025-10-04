@@ -1,5 +1,5 @@
 #from alembic.templates.
-from models import Base
+from models.models import Base
 target_metadata = Base.metadata
 
 from logging.config import fileConfig

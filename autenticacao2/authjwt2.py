@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Request, HTTPException, status, Depends
+from fastapi import APIRouter, Request, HTTPException, Depends
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from jose import jwt, JWTError, ExpiredSignatureError
 from passlib.context import CryptContext
-from pydantic import BaseModel
-from models import User,Moto
+from models.models import User,Moto
 from crud import get_db
 from schemas import LoginRequest,MotoOut,CriarMoto,CriarUsuario
 from typing import List

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, FastAPI
 from sqlalchemy.orm import Session
-from models import SessionLocal,Moto
+from models.models import SessionLocal,Moto
 from schemas import MotoOut, CriarMoto,Atualizar
 from typing import List
 
