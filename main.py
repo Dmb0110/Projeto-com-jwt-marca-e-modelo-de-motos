@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from fastapi import FastAPI
-from models import Base, engine
+from models.models import Base, engine
 from crud import router as crud_router
 from autenticacao2.authjwt2 import router as auth_router
 #from test_crud import router
