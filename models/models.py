@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, create_engine,ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker,relationship
 
 # URL de conexão com o banco PostgreSQL
-DATABASE_URL = "postgresql://postgres:davi9090@db:5432/banco_dmb"
+DATABASE_URL = "postgresql://postgres:davi9090@localhost:5432/banco_dmb"
 
 # Cria o motor de conexão com o banco
 engine = create_engine(DATABASE_URL)
