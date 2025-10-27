@@ -16,7 +16,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get('/')
+@router.get('/receber2')
 def receber():
     return {'mensagem':'API Fast esta funcionando via vercel'}
 
