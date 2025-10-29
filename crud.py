@@ -16,9 +16,9 @@ def get_db():
     finally:
         db.close()
 
-@router.get('/receber2')
+@router.get('/receber10')
 def receber():
-    return {'mensagem':'API Fast esta funcionando via vercel'}
+    return {'mensagem':'API Fast,e parceiro dev,infelizmente e so essa rota que ta funcionando'}
 
 
 # Endpoint para criar uma nova moto
@@ -31,7 +31,7 @@ def enviar(criar: CriarMoto,db: Session = Depends(get_db)):
     return nova_moto
 
 # Endpoint para listar todas as motos
-@router.get('/receber1',response_model=List[MotoOut])
+@router.get('/receber1')
 def receber(db: Session = Depends(get_db)):
     return db.query(Moto).all()
 
