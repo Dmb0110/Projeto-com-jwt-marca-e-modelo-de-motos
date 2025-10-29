@@ -18,7 +18,7 @@ def get_db():
 
 @router.get('/receber10')
 def receber():
-    return {'mensagem':'API Fast,e parceiro dev,infelizmente e so essa rota que ta funcionando'}
+    return {'mensagem':'tudo ok so nessa rota'}
 
 
 # Endpoint para criar uma nova moto
