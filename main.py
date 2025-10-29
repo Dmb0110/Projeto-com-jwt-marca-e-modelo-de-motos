@@ -9,8 +9,13 @@ import time
 #  Cria instancia da aplicaçao FastAPI
 app = FastAPI()
 
+
+@app.on_event("startup")
+def startup_event():
+    Base.metadata.create_all(bind=engine)
+
 #  Cria tabelas no banco de dados
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 #  Incluir rotas publicas e privadas na aplicaçao
 app.include_router(auth_router)
