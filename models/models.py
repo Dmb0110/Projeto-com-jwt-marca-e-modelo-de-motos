@@ -1,9 +1,15 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from sqlalchemy import Column, Integer, String, create_engine,ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker,relationship
 
 # URL de conexão com o banco PostgreSQL
-DATABASE_URL = "postgresql://postgres:davi9090@localhost:5432/banco_dmb"
+load_dotenv()
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+
+#DATABASE_URL = "postgresql://postgres:davi9090@localhost:5432/banco_dmb"
 
 # Cria o motor de conexão com o banco
 engine = create_engine(DATABASE_URL)
