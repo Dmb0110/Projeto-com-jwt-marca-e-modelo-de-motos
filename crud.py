@@ -18,7 +18,7 @@ def get_db():
 
 @router.get('/receber10')
 def receber():
-    return {'mensagem':'tudo ok so nessa rota'}
+    return {'mensagem':'parabens pelo deploy dev'}
 
 
 # Endpoint para criar uma nova moto
