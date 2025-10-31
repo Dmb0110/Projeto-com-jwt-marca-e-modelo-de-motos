@@ -4,7 +4,7 @@ from pydantic import BaseModel
 # Modelo para criação de usuário
 class CriarUsuario(BaseModel):
     username: str
-    password: str
+    password: constr(max_length=72)
 
 # Modelo para requisição de login
 class LoginRequest(BaseModel):
