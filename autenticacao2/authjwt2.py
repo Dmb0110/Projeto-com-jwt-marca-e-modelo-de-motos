@@ -66,20 +66,24 @@ def verificar_token(request: Request):
 # Endpoint para registrar novo usuário
 @router.post("/registro", status_code=201)
 def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
-    # Verifica se o usuário já existe
-    usuario_existente = db.query(User).filter(User.username == request.username).first()
-    if usuario_existente:
-        raise HTTPException(status_code=400, detail="Usuário já existe")
+    try:    # Verifica se o usuário já existe
+        usuario_existente = db.query(User).filter(User.username == request.username).first()
+        if usuario_existente:
+            raise HTTPException(status_code=400, detail="Usuário já existe")
 
     # Criptografa a senha
-    senha_hash = pwd_context.hash(request.password)
+        senha_hash = pwd_context.hash(request.password)
 
     # Cria e salva o novo usuário
-    novo_usuario = User(username=request.username, password=senha_hash)
-    db.add(novo_usuario)
-    db.commit()
-    db.refresh(novo_usuario)
-    return {"mensagem": "Usuário registrado com sucesso"}
+        novo_usuario = User(username=request.username, hashed_password=senha_hash)
+        db.add(novo_usuario)
+        db.commit()
+        db.refresh(novo_usuario)
+        return {"mensagem": "Usuário registrado com sucesso"}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
 
 # Endpoitn para login e geração de token
 @router.post("/login")

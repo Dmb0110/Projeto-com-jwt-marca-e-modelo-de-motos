@@ -20,9 +20,3 @@ def startup_event():
 #  Incluir rotas publicas e privadas na aplicaçao
 app.include_router(auth_router)
 app.include_router(crud_router)
-
-
-
-'''
-https://projeto3-autenticacao-5higfpodp-dmb0110s-projects.vercel.app/
-'''
