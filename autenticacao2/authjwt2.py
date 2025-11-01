@@ -41,7 +41,7 @@ def decode_token(token: str):
 # Atentica o usuário verificando credenciais
 def authenticate_user(db: Session, username: str, password: str):
     user = db.query(User).filter(User.username == username).first()
-    if not user or not verify_password(password, user.password):
+    if not user or not verify_password(password, user.hashed_password):
         return None
     return user
 
