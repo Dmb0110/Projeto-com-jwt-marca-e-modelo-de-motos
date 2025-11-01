@@ -20,8 +20,11 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Verifica se a senha fornecida corresponde ao hash
+#def verify_password(plain, hashed):
+ #   return pwd_context.verify(plain, hashed)
+
 def verify_password(plain, hashed):
-    return pwd_context.verify(plain, hashed)
+    return pwd_context.verify(plain[:72], hashed)
 
 # Criar um token JWT com tempo de expiração
 def create_token(data: dict, expires_delta: timedelta = None):
@@ -72,7 +75,8 @@ def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="Usuário já existe")
 
     # Criptografa a senha
-        senha_hash = pwd_context.hash(request.password)
+        senha_hash = pwd_context.hash(request.password[:72])
+        #senha_hash = pwd_context.hash(request.password)
 
     # Cria e salva o novo usuário
         novo_usuario = User(username=request.username, hashed_password=senha_hash)
