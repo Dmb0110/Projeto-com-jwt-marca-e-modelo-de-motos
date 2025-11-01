@@ -7,12 +7,14 @@ from models.models import User,Moto
 from crud import get_db
 from schemas import LoginRequest,MotoOut,CriarMoto,CriarUsuario
 from typing import List
+import os
 
 # Cria o reteador da API
 router = APIRouter()
 
 # Configurações do JWT
-SECRET_KEY = "sua_chave_secreta"
+#SECRET_KEY = "sua_chave_secreta"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
