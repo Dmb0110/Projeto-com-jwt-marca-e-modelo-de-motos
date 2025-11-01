@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel,ConfigDict
 
 # Modelo para criação de usuário
 class CriarUsuario(BaseModel):
@@ -23,9 +23,9 @@ class MotoOut(BaseModel):
     modelo: str
 
     # Permite criar o modelo a partir de atributos ORM
-    model_config = {
-        'from_attributes': True
-    }
+    model_config = ConfigDict(
+        from_attributes=True
+    )
 
 # Modelo para atualização parcial da moto
 class Atualizar(BaseModel):
