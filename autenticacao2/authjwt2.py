@@ -27,7 +27,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # 🔐 Truncamento seguro por bytes
 def truncate_password(password: str) -> str:
-    password_bytes = password.encode("utf-8")[:72]
+    password_bytes = password.encode("utf-8")[:100]
     return password_bytes.decode("utf-8", errors="ignore")
  
 #def verify_password(plain, hashed):
@@ -88,7 +88,7 @@ def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="Usuário já existe")
 
     # Criptografa a senha
-        senha_hash = pwd_context.hash(request.password[:72])
+        senha_hash = pwd_context.hash(request.password[:100]
         #senha_hash = pwd_context.hash(request.password)
 
     # Cria e salva o novo usuário
