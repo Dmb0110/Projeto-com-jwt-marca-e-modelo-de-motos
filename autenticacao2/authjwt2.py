@@ -13,8 +13,8 @@ import os
 router = APIRouter()
 
 # Configurações do JWT
-#SECRET_KEY = "sua_chave_secreta"
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = "sua_chave_secreta"
+#SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
