@@ -19,7 +19,7 @@ def get_db():
 @router.get("/ping")
 def ping_db(db: Session = Depends(get_db)):
     try:
-        users = db.query(User).all()
+        users = db.query(Users).all()
         return {"usuarios": [u.username for u in users]}
     except Exception as e:
         return {"erro": str(e)}
