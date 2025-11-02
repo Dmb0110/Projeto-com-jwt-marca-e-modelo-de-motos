@@ -19,7 +19,7 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 # Base para definição dos modelos
 Base = declarative_base()
 
-
+'''
 # 👤 Modelo da tabela 'users'
 class User(Base):
     __tablename__ = 'users'
@@ -43,7 +43,6 @@ class Moto(Base):
     # 🔗 Relacionamento com usuário
     dono = relationship("User", back_populates="motos")
 
-
 '''
 # Modelo da tabela 'users'
 class User(Base):
@@ -62,6 +61,6 @@ class Moto(Base):
     modelo = Column(String)
     #  Essa coluna se relaciona com a coluna [id] da tabela [users]
     dono_id = Column(Integer, ForeignKey('users.id'))
-'''
+
 
 
