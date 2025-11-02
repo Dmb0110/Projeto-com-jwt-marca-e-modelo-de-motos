@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "projeto3 autenticacao jwt/main.py",
+      "src": "main.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "projeto3 autenticacao jwt/main.py"
+      "dest": "main.py"
     }
   ]
 }
