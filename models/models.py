@@ -8,7 +8,6 @@ from sqlalchemy.orm import declarative_base, sessionmaker,relationship
 load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-
 #DATABASE_URL = "postgresql://postgres:davi9090@localhost:5432/banco_dmb"
 
 # Cria o motor de conexão com o banco
@@ -37,3 +36,4 @@ class Moto(Base):
     modelo = Column(String)
     #  Essa coluna se relaciona com a coluna [id] da tabela [users]
     dono_id = Column(Integer, ForeignKey('users.id'))
+

@@ -16,10 +16,17 @@ def get_db():
     finally:
         db.close()
 
+@router.get("/ping")
+def ping_db(db: Session = Depends(get_db)):
+    try:
+        users = db.query(Users).all()
+        return {"usuarios": [u.username for u in users]}
+    except Exception as e:
+        return {"erro": str(e)}
+
 @router.get('/receber10')
 def receber():
     return {'mensagem':'parabens pelo deploy dev'}
-
 
 # Endpoint para criar uma nova moto
 @router.post('/enviar1',response_model=MotoOut)
