@@ -41,7 +41,7 @@ def decode_token(token: str):
 # Atentica o usuário verificando credenciais
 def authenticate_user(db: Session, username: str, password: str):
     user = db.query(User).filter(User.username == username).first()
-    if not user or not verify_password(password, user.password):
+    if not user or not verify_password(password, user.hashed_password):
         return None
     return user
 
@@ -63,6 +63,31 @@ def verificar_token(request: Request):
     except JWTError:
         raise HTTPException(status_code=401, detail="Token inválido")
 
+
+
+# Endpoint para registrar novo usuário
+@router.post("/registro", status_code=201)
+async def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
+    #try:    # Verifica se o usuário já existe
+    usuario_existente = db.query(User).filter(User.username == request.username).first()
+    if usuario_existente:
+        raise HTTPException(status_code=400, detail="Usuário já existe")
+
+    # Criptografa a senha
+    senha_hash = pwd_context.hash(request.password)
+
+    # Cria e salva o novo usuário
+    novo_usuario = User(username=request.username, hashed_password=senha_hash)
+    db.add(novo_usuario)
+    db.commit()
+    db.refresh(novo_usuario)
+    return {"mensagem": "Usuário registrado com sucesso"}
+
+    #except Exception as e:
+     #   raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
+
+'''
 # Endpoint para registrar novo usuário
 @router.post("/registro", status_code=201)
 def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
@@ -83,7 +108,7 @@ def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
-
+'''
 
 # Endpoitn para login e geração de token
 @router.post("/login")
