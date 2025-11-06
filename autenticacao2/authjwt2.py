@@ -22,21 +22,21 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Verifica se a senha fornecida corresponde ao hash
-#def verify_password(plain, hashed):
- #   return pwd_context.verify(plain, hashed)
+def verify_password(plain, hashed):
+    return pwd_context.verify(plain, hashed)
 
 # 🔐 Truncamento seguro por bytes
-def truncate_password(password: str) -> str:
-    password_bytes = password.encode("utf-8")[:72]
-    return password_bytes.decode("utf-8", errors="ignore")
+#def truncate_password(password: str) -> str:
+ #   password_bytes = password.encode("utf-8")[:72]
+  #  return password_bytes.decode("utf-8", errors="ignore")
  
 #def verify_password(plain, hashed):
  #   return pwd_context.verify(plain[:72], hashed)
 
 # Verifica se a senha fornecida corresponde ao hash
-def verify_password(plain: str, hashed: str) -> bool:
-    plain_truncada = truncate_password(plain)
-    return pwd_context.verify(plain_truncada, hashed)
+#def verify_password(plain: str, hashed: str) -> bool:
+ #   plain_truncada = truncate_password(plain)
+  #  return pwd_context.verify(plain_truncada, hashed)
 
 # Criar um token JWT com tempo de expiração
 def create_token(data: dict, expires_delta: timedelta = None):
