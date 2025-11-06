@@ -8,7 +8,7 @@ class CriarUsuario(BaseModel):
 
 # Modelo para requisição de login
 class LoginRequest(BaseModel):
-    username: contr(max_length=72)
+    username: constr(max_length=72)
     password: constr(min_length=2, max_length=72)
 #############################################################
 # Modelo para criação de moto
