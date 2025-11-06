@@ -22,35 +22,31 @@ app.include_router(auth_router)
 app.include_router(crud_router)
 
 
-
 '''
 
-services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: davi9090
-      POSTGRES_DB: banco_dmb
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+# Endpoint para registrar novo usuário
+@router.post("/registro", status_code=201)
+async def registrar_usuario(request: CriarUsuario, db: Session = Depends(get_db)):
+    #try:    # Verifica se o usuário já existe
+    usuario_existente = db.query(User).filter(User.username == request.username).first()
+    if usuario_existente:
+        raise HTTPException(status_code=400, detail="Usuário já existe")
 
-  backend:  # renomeado de "web" para "backend" para refletir melhor o propósito
-    build: .
-    depends_on:
-      - db
-    ports:
-      - "8000:8000"  # ajuste conforme a porta usada pela sua API
-    environment:
-      DATABASE_URL: postgresql://postgres:davi9090@db:5432/banco_dmb
+    # Criptografa a senha
+    senha_hash = pwd_context.hash(request.password)
 
-volumes:
-  pgdata:
+    # Cria e salva o novo usuário
+    novo_usuario = User(username=request.username, hashed_password=senha_hash)
+    db.add(novo_usuario)
+    db.commit()
+    db.refresh(novo_usuario)
+    return {"mensagem": "Usuário registrado com sucesso"}
+
+    #except Exception as e:
+     #   raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
+
+
+
 '''
-
-
-
 
