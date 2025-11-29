@@ -1,0 +1,167 @@
+# API de Motos
+
+## Descrição
+API desenvolvida em **FastAPI** para gerenciar motos.  
+Permite cadastrar e consultar motos informando **marca** e **modelo**.
+
+------------------------------------------------------
+
+## Tecnologias utilizadas
+- Python 3.11+
+- FastAPI
+- SQLAlchemy
+- Alembic
+- PostgreSQL (Neon)
+
+------------------------------------------------------
+
+## Instalação e execução
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seuusuario/api-motos.git
+   cd api-motos
+
+------------------------------------------------------
+## (Visão geral do projeto)
+Título: Nome claro do projeto (ex.: “API de Motos”).
+
+Descrição: O que a API faz e para quem serve.
+
+Principais recursos: Cadastro e listagem de motos por marca e modelo.
+
+Tecnologias: Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL (Neon).
+
+------------------------------------------------------
+## (Pré-requisitos)
+Versões: Python 3.11+, PostgreSQL 14+.
+
+Dependências: FastAPI, Uvicorn, SQLAlchemy, Alembic, psycopg2.
+
+Acesso ao banco: String de conexão válida (ex.: Neon com sslmode).
+
+------------------------------------------------------
+## [CONFIGURAÇAO E INSTALAÇAO]
+## (Clonar o repositório):
+
+git clone https://github.com/seuusuario/api-motos.git
+cd api-motos
+
+-----------------------------------------------------
+##(Criar/ativar ambiente virtual):
+
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+
+-----------------------------------------------------
+## (Instalar dependências):
+
+bash
+pip install -r requirements.txt
+
+-----------------------------------------------------
+## (Variáveis de ambiente (.env)):
+
+DATABASE_URL=postgresql+psycopg2://usuario:senha@host:5432/nome_do_banco?sslmode=require
+
+
+-----------------------------------------------------
+## (Configurar Alembic (se aplicável)):
+
+Verifique alembic.ini e alembic/env.py apontando para DATABASE_URL.
+
+-----------------------------------------------------
+## (Migrações e execução)
+Aplicar migrações:
+
+alembic upgrade head
+Rodar servidor:
+
+uvicorn app.main:app --reload
+
+-----------------------------------------------------
+## (URLs de documentação):
+
+Swagger: http://localhost:8000/docs
+
+ReDoc: http://localhost:8000/redoc
+
+-----------------------------------------------------
+## (Endpoints da API)
+Criar moto (POST /motos):
+
+Body:
+
+json
+{
+  "marca": "Honda",
+  "modelo": "CG 160"
+}
+
+-----------------------------------------------------
+## Resposta:
+
+json
+{
+  "id": 1,
+  "marca": "Honda",
+  "modelo": "CG 160"
+}
+
+-----------------------------------------------------
+## Listar motos (GET /motos):
+
+Resposta:
+
+json
+[
+  { "id": 1, "marca": "Honda", "modelo": "CG 160" },
+  { "id": 2, "marca": "Yamaha", "modelo": "Fazer 250" }
+]
+-----------------------------------------------------
+## (Modelo de dados e validação)
+Entidade Moto: campos mínimos
+
+id: inteiro autoincremento.
+marca: string obrigatória.
+modelo: string obrigatória.
+
+Regras básicas:
+
+Marca/modelo não vazios: validar no schema (Pydantic).
+
+Erros comuns: retornar 422 para payload inválido.
+
+-------------------------------------------------------
+## (Testes e qualidade)
+Rodar testes:
+
+pytest
+
+-------------------------------------------------------
+## (Deploy (opcional))
+Container: Dockerfile e docker-compose para app + banco.
+
+Variáveis de produção: DATABASE_URL segura, UVICORN_WORKERS.
+
+Health check: endpoint simples (ex.: GET /health retornando 200).
+
+------------------------------------------------------
+## Estrutura do projeto
+app/main.py: inicialização FastAPI.
+
+app/routers/motos.py: rotas de motos.
+
+app/models.py: modelos SQLAlchemy.
+
+app/schemas.py: Pydantic.
+
+app/db.py: sessão e engine.
+
+alembic/: migrações.
+
+requirements.txt: dependências.
+
+README.md: documentação.
+

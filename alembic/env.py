@@ -1,5 +1,7 @@
-#from alembic.templates.
-from models.models import Base
+from app.models.models_moto import Moto
+from app.models.models_user import User
+
+from app.database.session import Base
 target_metadata = Base.metadata
 
 from logging.config import fileConfig
