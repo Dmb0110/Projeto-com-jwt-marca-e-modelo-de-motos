@@ -4,14 +4,17 @@ from app.routers.router_moto_auth import router as moto_auth
 from app.routers.router_registro import router as registro
 from app.routers.router_login import router as login
 
+#ria um APIRouter principal para organizar e agrupar sub-rotas.
 api_router = APIRouter()
 
-api_router.include_router(registro,prefix='/registro',tags=['registro'])
-api_router.include_router(login,prefix='/login',tags=['login'])
+# Inclui rotas de registro de usuário com prefixo e tag.
+api_router.include_router(registro, prefix='/registro', tags=['registro'])
 
-api_router.include_router(moto_auth,prefix='/moto_auth',tags=['moto_auth'])
+# Inclui rotas de login com prefixo e tag.
+api_router.include_router(login, prefix='/login', tags=['login'])
 
-api_router.include_router(moto,prefix='/moto',tags=['moto'])
+# Inclui rotas protegidas de motos (autenticadas).
+api_router.include_router(moto_auth, prefix='/moto_auth', tags=['moto_auth'])
 
-
-
+# Inclui rotas públicas de motos (CRUD básico).
+api_router.include_router(moto, prefix='/moto', tags=['moto'])
