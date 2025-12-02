@@ -91,12 +91,10 @@ Swagger: http://localhost:8000/docs
 ReDoc: http://localhost:8000/redoc
 
 -----------------------------------------------------
-## {Rontas públicas de moto}
-
 ## (Endpoints da API)
-## Criar moto (POST /moto):
+Criar moto (POST /motos):
 
-Body de requisiçao:
+Body:
 
 json
 {
@@ -104,7 +102,8 @@ json
   "modelo": "CG 160"
 }
 
-Body da resposta:
+-----------------------------------------------------
+## Resposta:
 
 json
 {
@@ -114,74 +113,15 @@ json
 }
 
 -----------------------------------------------------
-## Listar motos (GET /moto):
+## Listar motos (GET /motos):
 
-Body da resposta:
+Resposta:
 
 json
 [
   { "id": 1, "marca": "Honda", "modelo": "CG 160" },
   { "id": 2, "marca": "Yamaha", "modelo": "Fazer 250" }
 ]
-
------------------------------------------------------
-## Atualizar moto (PUT /moto)
-
-Body da requisiçao:
-
-json
-{
-  "marca": "Honda atualizada",
-  "modelo": "CG 160"
-}
-
-
-Body da resposta:
-json
-{
-  "id": 1,
-  "marca": "Honda atualizado",
-  "modelo": "CG 160"
-}
-
------------------------------------------------------
-## Deletar moto (DELETE /moto/{id})
-
-Resposta:
-{
-  'mensagem':'Moto deletada com sucesso'
-}
-
------------------------------------------------------
-## [Rotas privadas de moto]
-## Criar moto (POST /moto)
-
-Body da requisiçao:
-json
-{
-  "marca":"Honda",
-  "modelo":"xr 700"
-}
-
-Body da resposta:
-json
-{
-  "id":1,
-  "marca":"Honda",
-  "modelo":"xr 700"
-}
-
------------------------------------------------------
-## Listar motos (GET /moto)
-
-Resposta:
-
-json
-[
-  {"id":1,"marca":"Honda","modelo":"xr 700"},
-  {"id":2,"marca":"Honda","modelo":"xr 750"}
-]
-
 -----------------------------------------------------
 ## 🔐 Autenticação com JWT
 
@@ -195,27 +135,9 @@ Esse token deve ser enviado no cabeçalho das requisições para acessar endpoin
    Body:
    ```json
    {
-     "username": "anônimo",
+     "username": "joao",
      "password": "senha123"
    }
-
-## Login (POST /login)
-Autentica o usuario e retorna um toekn JWT.
-
-Body da requisiçao:
-
-json
-{
-  "username":"anônimo",
-  "password":"senha123"
-}
-
-Resposta da requisiçao:
-
-{
-  "access_token":"jwt_token_aqui",
-  "token_type:"bearer"
-}
 
 -----------------------------------------------------
 ## (Modelo de dados e validação)
@@ -266,17 +188,16 @@ Health check: endpoint simples (ex.: GET /health retornando 200).
 ## 📂 Estrutura do projeto
 app/
  ├── main.py
- ├── autenticacao2/authjwt2.py 
  ├── core/config.py
  ├── crud_services/        # 4 arquivos
  ├── database/session.py
  ├── models/               # 2 arquivos
  ├── routers/              # 4 arquivos
  ├── schemas.py
- ├── router.py
+ └── db.py
 
 alembic/                   # migrações
 requirements.txt           # dependências
 README.md                  # documentação
 
-
+-----------------------------------------------------
