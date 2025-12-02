@@ -273,10 +273,9 @@ app/
  ├── models/               # 2 arquivos
  ├── routers/              # 4 arquivos
  ├── schemas.py
- ├── router.py
+ ├── router.pycd 
 
 alembic/                   # migrações
 requirements.txt           # dependências
 README.md                  # documentação
-
 
