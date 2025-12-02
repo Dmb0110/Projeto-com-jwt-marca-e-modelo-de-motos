@@ -194,7 +194,6 @@ app/
  ├── models/               # 2 arquivos
  ├── routers/              # 4 arquivos
  ├── schemas.py
- └── db.py
 
 alembic/                   # migrações
 requirements.txt           # dependências
